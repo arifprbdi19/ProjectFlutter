@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_cozmodels/space.dart';
+import 'package:project_coz/models/space.dart';
 import 'package:project_coz/pages/error_page.dart';
 import 'package:project_coz/theme.dart';
 import 'package:project_coz/widgets/facility_item.dart';
-import 'package:project_cozwidgets/rating_item.dart';
+import 'package:project_coz/widgets/rating_item.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
@@ -43,7 +43,7 @@ class _DetailPageState extends State<DetailPage> {
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('Apakah kamu ingin menghubungi pemilik kos?'),
+                  Text('Apakah ingin menghubungi Resepsionis?'),
                 ],
               ),
             ),
@@ -124,7 +124,7 @@ class _DetailPageState extends State<DetailPage> {
                                 Text.rich(
                                   TextSpan(
                                     text: '\$${widget.space.price}',
-                                    style: purpleTextStyle.copyWith(
+                                    style: blueTextStyle.copyWith(
                                       fontSize: 16,
                                     ),
                                     children: [
@@ -181,17 +181,20 @@ class _DetailPageState extends State<DetailPage> {
                             FacilityItem(
                               name: 'kitchen',
                               imageUrl: 'assets/icon_kitchen.png',
-                              total: int.parse("${widget.space.numberOfKitchens}"),
+                              total:
+                                  int.parse("${widget.space.numberOfKitchens}"),
                             ),
                             FacilityItem(
                               name: 'bedroom',
                               imageUrl: 'assets/icon_bedroom.png',
-                              total: int.parse("${widget.space.numberOfBedrooms}"),
+                              total:
+                                  int.parse("${widget.space.numberOfBedrooms}"),
                             ),
                             FacilityItem(
                               name: 'Big Lemari',
                               imageUrl: 'assets/icon_cupboard.png',
-                              total: int.parse("${widget.space.numberOfCupboards}"),
+                              total: int.parse(
+                                  "${widget.space.numberOfCupboards}"),
                             ),
                           ],
                         ),
@@ -261,9 +264,8 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                             InkWell(
                               onTap: () {
-                                // launchUrl(
-                                //     'https://goo.gl/maps/SyZx2yjWB1yR6AeH8');
-
+                                launchUrl(
+                                    'https://goo.gl/maps/SyZx2yjWB1yR6AeH8');
                                 launchUrl("${widget.space.mapUrl}");
                               },
                               child: Image.asset(
@@ -283,13 +285,15 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         height: 50,
                         width: MediaQuery.of(context).size.width - (2 * edge),
-                        child: FlatButton(
+                        child: ElevatedButton(
                           onPressed: () {
-                            handleBook(widget.space);
+                            launchUrl('tel://+62 858-2374-3127+');
                           },
-                          color: purpleColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(17),
+                          style: ElevatedButton.styleFrom(
+                            primary: blueColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(17),
+                            ),
                           ),
                           child: Text(
                             'Book Now',

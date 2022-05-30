@@ -57,7 +57,7 @@ class BottomNavbarItem extends StatelessWidget {
         isActive
             ? Container(
                 width: 30,
-                height: 2,
+                height: 3,
                 decoration: BoxDecoration(
                   color: blueColor,
                   borderRadius: BorderRadius.vertical(

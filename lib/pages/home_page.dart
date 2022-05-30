@@ -13,8 +13,6 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var spaceProvider = Provider.of<SpaceProvider>(context);
-
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -170,10 +168,13 @@ class HomePage extends StatelessWidget {
                 horizontal: edge,
               ),
               child: FutureBuilder(
-                future: spaceProvider.getRecommendedSpaces(),
+                future:
+                    Provider.of<SpaceProvider>(context).getRecommendedSpaces(),
                 builder: (context, snapshot) {
+                  var datas = snapshot.data;
+                  print("$datas");
                   if (snapshot.hasData) {
-                    List<Space> data = snapshot.data;
+                    List<Space> data = [];
 
                     int index = 0;
 
@@ -203,32 +204,32 @@ class HomePage extends StatelessWidget {
             //   ),
             //     child: ,
 
-              // child: FutureBuilder(
-              //   future: spaceProvider.getRecommendedSpaces(),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.hasData) {
-                    //return Text("${Space.fromJson(snapshot.data).runtimeType}");
-                    // List<Space> data = snapshot.data!;
-              //       int index = 0;
+            // child: FutureBuilder(
+            //   future: spaceProvider.getRecommendedSpaces(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //return Text("${Space.fromJson(snapshot.data).runtimeType}");
+            // List<Space> data = snapshot.data!;
+            //       int index = 0;
 
-                    // return Column(
-                    //   children: data.map((item) {
-                    //     index++;
-                    //     return Container(
-                    //       margin: EdgeInsets.only(
-                    //         top: index == 1 ? 0 : 30,
-                    //       ),
-                    //       child: SpaceCard(item),
-                    //     );
-                    //   }).toList(),
-                    // );
-              //     }
+            // return Column(
+            //   children: data.map((item) {
+            //     index++;
+            //     return Container(
+            //       margin: EdgeInsets.only(
+            //         top: index == 1 ? 0 : 30,
+            //       ),
+            //       child: SpaceCard(item),
+            //     );
+            //   }).toList(),
+            // );
+            //     }
 
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   },
-              // ),
+            //     return Center(
+            //       child: CircularProgressIndicator(),
+            //     );
+            //   },
+            // ),
             // ),
 
             SizedBox(
