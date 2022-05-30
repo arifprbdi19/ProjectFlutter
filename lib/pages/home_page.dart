@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_coz/models/city.dart';
+import 'package:project_coz/models/space.dart';
 import 'package:project_coz/models/tips.dart';
 import 'package:project_coz/providers/space_provider.dart';
 import 'package:project_coz/theme.dart';
 import 'package:project_coz/widgets/bottom_navbar_item.dart';
 import 'package:project_coz/widgets/city_card.dart';
+import 'package:project_coz/widgets/space_card.dart';
 import 'package:project_coz/widgets/tips_card.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +53,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: edge),
               child: Text(
-                'Popular Cities',
+                'Kota terfavorit',
                 style: regularTextStyle.copyWith(
                   fontSize: 16,
                 ),
@@ -68,7 +70,8 @@ class HomePage extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 24,
-                  ), //NOTE: GAMBAR / BUOTTON POPULAR CITIESCity
+                  ),
+                  //NOTE: GAMBAR / BUOTTON POPULAR CITIESCity
                   CityCard(
                     City(
                       id: 1,
@@ -151,6 +154,18 @@ class HomePage extends StatelessWidget {
               height: 16,
             ),
             Padding(
+              padding: EdgeInsets.only(left: edge),
+              child: Text(
+                'Recommended Space',
+                style: regularTextStyle.copyWith(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: edge,
               ),
@@ -158,9 +173,43 @@ class HomePage extends StatelessWidget {
                 future: spaceProvider.getRecommendedSpaces(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    List<Space> data = snapshot.data;
+
+                    int index = 0;
+
+                    return Column(
+                      children: data.map((item) {
+                        index++;
+                        return Container(
+                          margin: EdgeInsets.only(
+                            top: index == 1 ? 0 : 30,
+                          ),
+                          child: SpaceCard(item),
+                        );
+                      }).toList(),
+                    );
+                  }
+
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            ),
+
+            // Padding(
+            //   padding: EdgeInsets.symmetric(
+            //     horizontal: edge,
+            //   ),
+            //     child: ,
+
+              // child: FutureBuilder(
+              //   future: spaceProvider.getRecommendedSpaces(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.hasData) {
                     //return Text("${Space.fromJson(snapshot.data).runtimeType}");
                     // List<Space> data = snapshot.data!;
-                    int index = 0;
+              //       int index = 0;
 
                     // return Column(
                     //   children: data.map((item) {
@@ -173,14 +222,14 @@ class HomePage extends StatelessWidget {
                     //     );
                     //   }).toList(),
                     // );
-                  }
+              //     }
 
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              ),
-            ),
+              //     return Center(
+              //       child: CircularProgressIndicator(),
+              //     );
+              //   },
+              // ),
+            // ),
 
             SizedBox(
               height: 30,

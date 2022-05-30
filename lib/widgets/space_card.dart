@@ -92,7 +92,7 @@ class SpaceCard extends StatelessWidget {
                   ),
                   children: [
                     TextSpan(
-                      text: ' / month',
+                      text: ' / day',
                       style: greyTextStyle.copyWith(
                         fontSize: 16,
                       ),
