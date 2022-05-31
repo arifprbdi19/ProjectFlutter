@@ -7,29 +7,17 @@ Color blackColor = Color(0xff000000);
 Color whiteColor = Color(0xffFFFFFF);
 Color greyColor = Color(0xff7A7E86);
 
-double edge = 24;
+TextStyle blackText =
+    GoogleFonts.poppins(fontWeight: FontWeight.w500, color: blackColor);
 
-TextStyle regularTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w400,
-  color: blackColor,
-);
+TextStyle whiteText =
+    GoogleFonts.poppins(fontWeight: FontWeight.w500, color: whiteColor);
 
-TextStyle blackTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w500,
-  color: blackColor,
-);
+TextStyle greyText =
+    GoogleFonts.poppins(fontWeight: FontWeight.w300, color: greyColor);
 
-TextStyle whiteTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w500,
-  color: whiteColor,
-);
+TextStyle blueText =
+    GoogleFonts.poppins(fontWeight: FontWeight.w500, color: blueColor);
 
-TextStyle greyTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w300,
-  color: greyColor,
-);
-
-TextStyle blueTextStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w500,
-  color: blueColor,
-);
+TextStyle regularText =
+    GoogleFonts.poppins(fontWeight: FontWeight.w400, color: blackColor);

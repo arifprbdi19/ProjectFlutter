@@ -1,14 +1,7 @@
 class Tips {
-  int? id;
-  String? title;
-  String? imageUrl;
-  String? updatedAt;
+  String image;
+  String title;
+  String date;
 
-  Tips({
-    this.id,
-    this.imageUrl,
-    this.title,
-    this.updatedAt,
-  }
-  );
+  Tips({required this.date, required this.image, required this.title});
 }

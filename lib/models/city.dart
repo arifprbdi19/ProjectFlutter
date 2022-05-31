@@ -1,8 +1,13 @@
 class City {
-  int? id;
-  String? name;
-  String? imageUrl;
-  bool? isPopular;
+  int id;
+  String name;
+  String image;
+  bool isFavorite;
 
-  City({this.id, this.imageUrl, this.name, this.isPopular = false});
+  City({
+    required this.id,
+    required this.name,
+    required this.image,
+    this.isFavorite = false,
+  });
 }

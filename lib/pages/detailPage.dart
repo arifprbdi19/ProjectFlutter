@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project_coz/models/facility.dart';
 import 'package:project_coz/models/space.dart';
 import 'package:project_coz/pages/error_page.dart';
 import 'package:project_coz/theme.dart';
-import 'package:project_coz/widgets/facility_item.dart';
-import 'package:project_coz/widgets/rating_item.dart';
+import 'package:project_coz/widgets/facilitiesCard.dart';
+import 'package:project_coz/widgets/star.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatefulWidget {
@@ -12,19 +13,18 @@ class DetailPage extends StatefulWidget {
   DetailPage(this.space);
 
   @override
-  _DetailPageState createState() => _DetailPageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool isFavorite = false;
+  bool isClicked = false;
 
   @override
   Widget build(BuildContext context) {
-    launchUrl(String url) async {
-      if (await canLaunch(url)) {
-        launch(url);
+    launchUrl(String urlString) async {
+      if (await canLaunch(urlString)) {
+        launch(urlString);
       } else {
-        // throw (url);
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -34,34 +34,31 @@ class _DetailPageState extends State<DetailPage> {
       }
     }
 
-    Future<void> handleBook(Space space) async {
-      return showDialog<void>(
+    Future<void> showConfirmation() async {
+      return showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Konfirmasi'),
+            title: const Text('AlertDialog Title'),
             content: SingleChildScrollView(
               child: ListBody(
-                children: <Widget>[
-                  Text('Apakah ingin menghubungi Resepsionis?'),
+                children: const <Widget>[
+                  Text('Apakah anda ingin menghubungi resepcionist'),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: Text(
-                  'Nanti',
-                  style: greyTextStyle,
-                ),
+                child: const Text('Batalkan'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text('Hubungi'),
+                child: const Text('Hubungi'),
                 onPressed: () {
                   Navigator.of(context).pop();
-                  launchUrl('tel:${space.phone}');
+                  launchUrl('tel:${widget.space.phone}');
                 },
               ),
             ],
@@ -71,13 +68,13 @@ class _DetailPageState extends State<DetailPage> {
     }
 
     return Scaffold(
-      backgroundColor: whiteColor,
+      backgroundColor: Color(0xffFFFFFF),
       body: SafeArea(
         bottom: false,
         child: Stack(
           children: [
             Image.network(
-              "${widget.space.imageUrl}",
+              widget.space.image,
               width: MediaQuery.of(context).size.width,
               height: 350,
               fit: BoxFit.cover,
@@ -101,11 +98,8 @@ class _DetailPageState extends State<DetailPage> {
                       SizedBox(
                         height: 30,
                       ),
-                      // NOTE: TITLE
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: edge,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -113,44 +107,33 @@ class _DetailPageState extends State<DetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${widget.space.name}",
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 22,
-                                  ),
+                                  widget.space.name,
+                                  style: blackText.copyWith(fontSize: 22),
                                 ),
                                 SizedBox(
                                   height: 2,
                                 ),
                                 Text.rich(
                                   TextSpan(
-                                    text: '\$${widget.space.price}',
-                                    style: blueTextStyle.copyWith(
-                                      fontSize: 16,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text: ' / month',
-                                        style: greyTextStyle.copyWith(
-                                          fontSize: 16,
+                                      text: '\$${widget.space.price}',
+                                      style: blueText.copyWith(fontSize: 16),
+                                      children: [
+                                        TextSpan(
+                                          text: ' / month',
+                                          style:
+                                              greyText.copyWith(fontSize: 16),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ]),
                                 ),
                               ],
                             ),
                             Row(
-                              children: [1, 2, 3, 4, 5].map((index) {
-                                return Container(
-                                  margin: EdgeInsets.only(
-                                    left: 2,
-                                  ),
-                                  child: RatingItem(
-                                    index: index,
-                                    rating: int.parse("${widget.space.rating}"),
-                                  ),
-                                );
-                              }).toList(),
+                              children: [1, 2, 3, 4, 5]
+                                  .map(
+                                    (e) => StarIcon(
+                                        index: e, rating: widget.space.rating),
+                                  )
+                                  .toList(),
                             ),
                           ],
                         ),
@@ -158,43 +141,41 @@ class _DetailPageState extends State<DetailPage> {
                       SizedBox(
                         height: 30,
                       ),
-                      // NOTE: MAIN FACILITIES
                       Padding(
-                        padding: EdgeInsets.only(left: edge),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
                           'Main Facilities',
-                          style: regularTextStyle.copyWith(
-                            fontSize: 16,
-                          ),
+                          style: regularText.copyWith(fontSize: 16),
                         ),
                       ),
                       SizedBox(
                         height: 12,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: edge,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            FacilityItem(
-                              name: 'kitchen',
-                              imageUrl: 'assets/icon_kitchen.png',
-                              total:
-                                  int.parse("${widget.space.numberOfKitchens}"),
+                            FacilityCard(
+                              Facility(
+                                amount: widget.space.kitchens,
+                                title: 'kitchen',
+                                image: 'assets/images/kitchen.png',
+                              ),
                             ),
-                            FacilityItem(
-                              name: 'bedroom',
-                              imageUrl: 'assets/icon_bedroom.png',
-                              total:
-                                  int.parse("${widget.space.numberOfBedrooms}"),
+                            FacilityCard(
+                              Facility(
+                                amount: widget.space.bedrooms,
+                                title: 'bedroom',
+                                image: 'assets/images/bed.png',
+                              ),
                             ),
-                            FacilityItem(
-                              name: 'Big Lemari',
-                              imageUrl: 'assets/icon_cupboard.png',
-                              total: int.parse(
-                                  "${widget.space.numberOfCupboards}"),
+                            FacilityCard(
+                              Facility(
+                                amount: widget.space.cupboards,
+                                title: 'Big Lemari',
+                                image: 'assets/images/cupboard.png',
+                              ),
                             ),
                           ],
                         ),
@@ -202,14 +183,11 @@ class _DetailPageState extends State<DetailPage> {
                       SizedBox(
                         height: 30,
                       ),
-                      // NOTE: PHOTO
                       Padding(
-                        padding: EdgeInsets.only(left: edge),
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
                           'Photos',
-                          style: regularTextStyle.copyWith(
-                            fontSize: 16,
-                          ),
+                          style: regularText.copyWith(fontSize: 16),
                         ),
                       ),
                       SizedBox(
@@ -219,15 +197,13 @@ class _DetailPageState extends State<DetailPage> {
                         height: 88,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
-                          children: widget.space.photos!.map((item) {
+                          children: widget.space.photos.map((e) {
                             return Container(
-                              margin: EdgeInsets.only(
-                                left: 24,
-                              ),
+                              padding: EdgeInsets.only(left: 24),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
                                 child: Image.network(
-                                  item,
+                                  e,
                                   width: 110,
                                   height: 88,
                                   fit: BoxFit.cover,
@@ -240,82 +216,68 @@ class _DetailPageState extends State<DetailPage> {
                       SizedBox(
                         height: 30,
                       ),
-                      // NOTE: LOCATION
                       Padding(
-                        padding: EdgeInsets.only(left: edge),
+                        padding: EdgeInsets.symmetric(horizontal: 24),
                         child: Text(
                           'Location',
-                          style: regularTextStyle.copyWith(
-                            fontSize: 16,
-                          ),
+                          style: regularText.copyWith(fontSize: 16),
                         ),
                       ),
                       SizedBox(
                         height: 6,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: edge),
+                        padding: EdgeInsets.symmetric(horizontal: 24),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               '${widget.space.address}\n${widget.space.city}',
-                              style: greyTextStyle,
+                              style: greyText.copyWith(fontSize: 14),
                             ),
                             InkWell(
                               onTap: () {
-                                launchUrl(
-                                    'https://goo.gl/maps/SyZx2yjWB1yR6AeH8');
-                                launchUrl("${widget.space.mapUrl}");
+                                launchUrl(widget.space.map);
                               },
                               child: Image.asset(
-                                'assets/btn_map.png',
+                                'assets/images/btn_location.png',
                                 width: 40,
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 30,
                       ),
                       Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: edge,
-                        ),
                         height: 50,
-                        width: MediaQuery.of(context).size.width - (2 * edge),
+                        width: MediaQuery.of(context).size.width - (2 * 24),
+                        margin: EdgeInsets.symmetric(horizontal: 24),
                         child: ElevatedButton(
                           onPressed: () {
-                            launchUrl('tel://+62 858-2374-3127+');
+                            showConfirmation();
                           },
-                          style: ElevatedButton.styleFrom(
-                            primary: blueColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(17),
-                            ),
-                          ),
                           child: Text(
-                            'Book Now',
-                            style: whiteTextStyle.copyWith(
-                              fontSize: 18,
-                            ),
+                            'Pesan Sekarang',
+                            style: whiteText.copyWith(fontSize: 18),
                           ),
+                          style: ElevatedButton.styleFrom(
+                              primary: blueColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(17))),
                         ),
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 30,
                       ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
             Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: edge,
-                vertical: 30,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -324,27 +286,23 @@ class _DetailPageState extends State<DetailPage> {
                       Navigator.pop(context);
                     },
                     child: Image.asset(
-                      'assets/btn_back.png',
+                      'assets/images/btn_back.png',
                       width: 40,
                     ),
                   ),
-                  // Image.asset(
-                  //   'assets/btn_wishlist.png',
-                  //   width: 40,
-                  // ),
                   InkWell(
                     onTap: () {
                       setState(() {
-                        isFavorite = !isFavorite;
+                        isClicked = !isClicked;
                       });
                     },
                     child: Image.asset(
-                      isFavorite
-                          ? 'assets/btn_wishlist_active.png'
-                          : 'assets/btn_wishlist.png',
+                      isClicked
+                          ? 'assets/images/btn_wishlist_active.png'
+                          : 'assets/images/btn_wishlist.png',
                       width: 40,
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

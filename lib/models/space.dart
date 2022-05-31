@@ -1,50 +1,49 @@
 class Space {
-  int? id;
-  String? name;
-  String? imageUrl;
-  int? price;
-  String? city;
-  String? country;
-  int? rating;
-  String? address;
-  String? phone;
-  String? mapUrl;
-  List? photos;
-  int? numberOfKitchens;
-  int? numberOfBedrooms;
-  int? numberOfCupboards;
+  late int id;
+  late String image;
+  late String name;
+  late int price;
+  late String city;
+  late int rating;
+  late String country;
+  late String address;
+  late String phone;
+  late String map;
+  late List photos;
+  late int kitchens;
+  late int bedrooms;
+  late int cupboards;
 
-  Space({
-    this.city,
-    this.country,
-    this.id,
-    this.imageUrl,
-    this.name,
-    this.price,
-    this.rating,
-    this.address,
-    this.mapUrl,
-    this.numberOfBedrooms,
-    this.numberOfCupboards,
-    this.numberOfKitchens,
-    this.phone,
-    this.photos,
-  });
+  Space(
+      {required this.city,
+      required this.rating,
+      required this.name,
+      required this.image,
+      required this.price,
+      required this.id,
+      required this.address,
+      required this.bedrooms,
+      required this.country,
+      required this.cupboards,
+      required this.kitchens,
+      required this.map,
+      required this.phone,
+      required this.photos});
 
   Space.fromJson(json) {
     id = json['id'];
     name = json['name'];
     city = json['city'];
     country = json['country'];
-    imageUrl = json['image_url'];
+    image = json['image_url'];
     price = json['price'];
     rating = json['rating'];
     address = json['address'];
     phone = json['phone'];
-    mapUrl = json['map_url'];
     photos = json['photos'];
-    numberOfBedrooms = json['number_of_bedrooms'];
-    numberOfCupboards = json['number_of_cupboards'];
-    numberOfKitchens = json['number_of_kitchens'];
+    map = json['map_url'];
+    kitchens = json['number_of_kitchens'];
+    bedrooms = json['number_of_bedrooms'];
+    cupboards = json['number_of_cupboards'];
   }
 }

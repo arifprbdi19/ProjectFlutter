@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_coz/pages/splash_page.dart';
-import 'package:project_coz/providers/space_provider.dart';
-import 'package:project_coz/theme.dart';
+import 'package:project_coz/pages/splashPage.dart';
+import 'package:project_coz/providers/spaceProvider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());

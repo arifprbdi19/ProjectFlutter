@@ -20,12 +20,12 @@ class CityCard extends StatelessWidget {
             Stack(
               children: [
                 Image.asset(
-                  "${city.imageUrl}",
+                  "${city.image}",
                   width: 120,
                   height: 102,
                   fit: BoxFit.cover,
                 ),
-                if (city.isPopular!)
+                if (city.isFavorite!)
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(
@@ -39,7 +39,7 @@ class CityCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: Image.asset(
-                          'assets/icon_star.png',
+                          'assets/images/icon_star.png',
                           width: 22,
                           height: 22,
                         ),
@@ -55,7 +55,7 @@ class CityCard extends StatelessWidget {
             ),
             Text(
               "${city.name}",
-              style: blackTextStyle.copyWith(
+              style: blackText.copyWith(
                 fontSize: 16,
               ),
             ),
