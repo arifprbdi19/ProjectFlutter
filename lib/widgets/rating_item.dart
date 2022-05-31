@@ -10,7 +10,6 @@ class RatingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       index <= rating ? 'assets/icon_star.png' : 'assets/icon_star_grey.png',
-      width: 20,
     );
   }
 }

@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var spaceProvider = Provider.of<SpaceProvider>(context);
+
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -152,30 +154,15 @@ class HomePage extends StatelessWidget {
               height: 16,
             ),
             Padding(
-              padding: EdgeInsets.only(left: edge),
-              child: Text(
-                'Recommended Space',
-                style: regularTextStyle.copyWith(
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: edge,
               ),
               child: FutureBuilder(
-                future:
-                    Provider.of<SpaceProvider>(context).getRecommendedSpaces(),
+                future: spaceProvider.getRecommendedSpaces(),
                 builder: (context, snapshot) {
-                  var datas = snapshot.data;
-                  print("$datas");
                   if (snapshot.hasData) {
                     List<Space> data = [];
-
+                    print(data);
                     int index = 0;
 
                     return Column(
@@ -197,40 +184,6 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-
-            // Padding(
-            //   padding: EdgeInsets.symmetric(
-            //     horizontal: edge,
-            //   ),
-            //     child: ,
-
-            // child: FutureBuilder(
-            //   future: spaceProvider.getRecommendedSpaces(),
-            //   builder: (context, snapshot) {
-            //     if (snapshot.hasData) {
-            //return Text("${Space.fromJson(snapshot.data).runtimeType}");
-            // List<Space> data = snapshot.data!;
-            //       int index = 0;
-
-            // return Column(
-            //   children: data.map((item) {
-            //     index++;
-            //     return Container(
-            //       margin: EdgeInsets.only(
-            //         top: index == 1 ? 0 : 30,
-            //       ),
-            //       child: SpaceCard(item),
-            //     );
-            //   }).toList(),
-            // );
-            //     }
-
-            //     return Center(
-            //       child: CircularProgressIndicator(),
-            //     );
-            //   },
-            // ),
-            // ),
 
             SizedBox(
               height: 30,
