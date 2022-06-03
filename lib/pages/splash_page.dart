@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_coz/theme.dart';
-import 'homePage.dart';
+import 'home_page.dart';
 
 class SplashPage extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Image.asset('assets/images/splashimage.png'),
+                child: Image.asset('assets/images/splash_image.png'),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 50, left: 30),
@@ -31,14 +31,14 @@ class SplashPage extends StatelessWidget {
                       height: 30,
                     ),
                     Text(
-                      'Find Cozy House\nto Stay and Happy',
+                      'HOTELQ\nPemesanan hotel ternyaman',
                       style: blackText.copyWith(fontSize: 24),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      'Stop membuang banyak waktu\npada tempat yang tidak habitable',
+                      'Membantu anda untuk mencari\nHotel sesuai keingingan anda',
                       style: greyText.copyWith(fontSize: 16),
                     ),
                     SizedBox(

@@ -25,7 +25,7 @@ class CityCard extends StatelessWidget {
                   height: 102,
                   fit: BoxFit.cover,
                 ),
-                if (city.isFavorite!)
+                if (city.isFavorite)
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(

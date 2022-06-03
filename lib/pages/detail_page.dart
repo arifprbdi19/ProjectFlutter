@@ -237,6 +237,7 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                             InkWell(
                               onTap: () {
+                                print("$widget");
                                 launchUrl(widget.space.map);
                               },
                               child: Image.asset(
