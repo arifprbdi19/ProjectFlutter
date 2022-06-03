@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_coz/models/space.dart';
-import 'package:project_coz/pages/detailPage.dart';
+import 'package:project_coz/pages/detail_page.dart';
 import 'package:project_coz/theme.dart';
 
 class SpaceCard extends StatelessWidget {

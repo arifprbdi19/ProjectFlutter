@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_coz/pages/login_page.dart';
 import 'package:project_coz/theme.dart';
 import 'home_page.dart';
 
@@ -32,7 +33,7 @@ class SplashPage extends StatelessWidget {
                     ),
                     Text(
                       'HOTELQ\nPemesanan hotel ternyaman',
-                      style: blackText.copyWith(fontSize: 24),
+                      style: blueText.copyWith(fontSize: 24),
                     ),
                     SizedBox(
                       height: 10,
@@ -52,7 +53,7 @@ class SplashPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => HomePage(),
+                                builder: (context) => LoginScreen(),
                               ));
                         },
                         child: Text(

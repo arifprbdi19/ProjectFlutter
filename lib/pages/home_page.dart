@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:project_coz/models/city.dart';
 import 'package:project_coz/models/space.dart';
 import 'package:project_coz/models/tips.dart';
-import 'package:project_coz/providers/spaceProvider.dart';
+import 'package:project_coz/providers/space_provider.dart';
 import 'package:project_coz/theme.dart';
-import 'package:project_coz/widgets/buttonNav.dart';
-import 'package:project_coz/widgets/cityCard.dart';
-import 'package:project_coz/widgets/spaceCard.dart';
-import 'package:project_coz/widgets/tipsCard.dart';
+import 'package:project_coz/widgets/button_nav.dart';
+import 'package:project_coz/widgets/city_card.dart';
+import 'package:project_coz/widgets/space_card.dart';
+import 'package:project_coz/widgets/tips_card.dart';
 import 'package:provider/provider.dart';
+import 'package:project_coz/pages/login_page.dart';
 
 class HomePage extends StatelessWidget {
   @override

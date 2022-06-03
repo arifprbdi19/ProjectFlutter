@@ -3,7 +3,7 @@ import 'package:project_coz/models/facility.dart';
 import 'package:project_coz/models/space.dart';
 import 'package:project_coz/pages/error_page.dart';
 import 'package:project_coz/theme.dart';
-import 'package:project_coz/widgets/facilitiesCard.dart';
+import 'package:project_coz/widgets/facilities_card.dart';
 import 'package:project_coz/widgets/star.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -119,7 +119,7 @@ class _DetailPageState extends State<DetailPage> {
                                       style: blueText.copyWith(fontSize: 16),
                                       children: [
                                         TextSpan(
-                                          text: ' / month',
+                                          text: ' / day',
                                           style:
                                               greyText.copyWith(fontSize: 16),
                                         ),
